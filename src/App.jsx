@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import { AppProvider, useAppContext } from './context/AppContext'
 import Sidebar from './components/Sidebar'
@@ -36,9 +36,9 @@ function Layout() {
 export default function App() {
   return (
     <AppProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Layout />
-      </BrowserRouter>
+      </HashRouter>
     </AppProvider>
   )
 }
