@@ -1,4 +1,4 @@
-# Financial Tracker
+# FinTrack
 
 A personal finance dashboard for tracking expenses, income, subscriptions, and category budgets. Built with React + Vite and deployed on GitHub Pages.
 
