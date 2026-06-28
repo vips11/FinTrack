@@ -11,6 +11,11 @@ const settingsRouter = require('./routes/settings')
 const app = express()
 app.use(cors())
 app.use(express.json())
+
+// Webhook route — no auth (called by Plaid directly)
+app.use('/api/webhook', require('./routes/webhook'))
+
+// All other routes require auth
 app.use(authMiddleware)
 
 app.use('/api/transactions', transactionsRouter)

@@ -14,6 +14,7 @@ router.post('/create-link-token', async (req, res) => {
       products: [Products.Transactions],
       country_codes: [CountryCode.Ca],
       language: 'en',
+      webhook: process.env.WEBHOOK_URL || undefined,
     })
     res.json({ link_token: response.data.link_token })
   } catch (err) {
