@@ -57,14 +57,9 @@ A full-stack personal finance dashboard for tracking expenses, income, subscript
 
 ### Backend
 - Node.js + Express
-- MongoDB (Atlas)
-- Firebase Admin (token verification)
+- MongoDB
+- Firebase (token verification)
 - Plaid SDK (bank connections)
-
-### Hosting
-- Frontend: GitHub Pages
-- Backend: Render (free tier)
-- Database: MongoDB Atlas (free tier)
 
 ## Development
 
@@ -77,30 +72,6 @@ npm run dev
 cd server
 npm install
 node index.js
-```
-
-## Environment Variables
-
-### Frontend (`.env`)
-```
-VITE_FIREBASE_API_KEY=
-VITE_FIREBASE_AUTH_DOMAIN=
-VITE_FIREBASE_PROJECT_ID=
-VITE_FIREBASE_STORAGE_BUCKET=
-VITE_FIREBASE_MESSAGING_SENDER_ID=
-VITE_FIREBASE_APP_ID=
-VITE_API_URL=http://localhost:5000/api
-```
-
-### Backend (`server/.env`)
-```
-PORT=5000
-MONGODB_URI=
-FIREBASE_PROJECT_ID=
-PLAID_CLIENT_ID=
-PLAID_SECRET_DEVELOPMENT=
-PLAID_SECRET_SANDBOX=
-PLAID_ENV=development
 ```
 
 ## Future Roadmap
