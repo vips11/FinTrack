@@ -101,7 +101,7 @@ export default function Dashboard() {
           <div className="summary-stat" style={{ marginBottom: '1rem' }}>
             <div className="value" style={{ color: 'var(--red)' }}>{formatCurrency(expenses)}</div>
           </div>
-          <ResponsiveContainer width="100%" height={200}>
+          <ResponsiveContainer width="100%" height={180}>
             <AreaChart data={chartData}>
               <defs>
                 <linearGradient id="gradSpend" x1="0" y1="0" x2="0" y2="1">
@@ -117,21 +117,19 @@ export default function Dashboard() {
               <Area type="linear" dataKey="Last month" stroke="#888888" strokeWidth={1.5} strokeDasharray="5 5" fill="none" dot={false} />
             </AreaChart>
           </ResponsiveContainer>
-        </div>
-      </div>
 
-      <div className="card">
-        <div className="card-header"><h3>Income vs Expenses</h3></div>
-        <ResponsiveContainer width="100%" height={220}>
-          <AreaChart data={chartData}>
-            <XAxis dataKey="month" tickLine={false} axisLine={false} fontSize={11} tick={{ fill: '#888' }} />
-            <YAxis tickLine={false} axisLine={false} fontSize={11} tick={{ fill: '#888' }} tickFormatter={(v) => `$${v}`} />
-            <Tooltip formatter={(v) => formatCurrency(v)} />
-            <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: '0.72rem' }} />
-            <Area type="linear" dataKey="Income" stroke="var(--green)" strokeWidth={2} fill="none" dot={{ r: 3 }} />
-            <Area type="linear" dataKey="Expenses" stroke="var(--red)" strokeWidth={2} fill="none" dot={{ r: 3 }} />
-          </AreaChart>
-        </ResponsiveContainer>
+          <h4 style={{ fontSize: '0.85rem', margin: '1.5rem 0 0.5rem', color: 'var(--text-muted)' }}>Income vs Expenses</h4>
+          <ResponsiveContainer width="100%" height={180}>
+            <AreaChart data={chartData}>
+              <XAxis dataKey="month" tickLine={false} axisLine={false} fontSize={11} tick={{ fill: '#888' }} />
+              <YAxis tickLine={false} axisLine={false} fontSize={11} tick={{ fill: '#888' }} tickFormatter={(v) => `$${v}`} />
+              <Tooltip formatter={(v) => formatCurrency(v)} />
+              <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: '0.72rem' }} />
+              <Area type="linear" dataKey="Income" stroke="var(--green)" strokeWidth={2} fill="none" dot={{ r: 3 }} />
+              <Area type="linear" dataKey="Expenses" stroke="var(--red)" strokeWidth={2} fill="none" dot={{ r: 3 }} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
       </div>
 
       <div className="grid-2">
