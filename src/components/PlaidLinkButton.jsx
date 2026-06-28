@@ -6,6 +6,7 @@ import { useAlert } from './AlertDialog'
 
 export function LinkedAccounts() {
   const { user } = useAuth()
+  const { showAlert } = useAlert()
   const [accounts, setAccounts] = useState([])
 
   useEffect(() => {
@@ -15,6 +16,20 @@ export function LinkedAccounts() {
     })
   }, [])
 
+  const unlink = (a) => {
+    showAlert({
+      title: 'Unlink Bank',
+      message: `Remove ${a.institutionName || 'this bank'}? This won't delete synced transactions.`,
+      showCancel: true,
+      confirmText: 'Unlink',
+      onConfirm: () => {
+        api.raw(`/plaid/accounts/${a._id}`, { method: 'DELETE' }).then(() => {
+          setAccounts((prev) => prev.filter((x) => x._id !== a._id))
+        })
+      }
+    })
+  }
+
   if (accounts.length === 0) return null
 
   return (
@@ -23,7 +38,10 @@ export function LinkedAccounts() {
       {accounts.map((a) => (
         <div key={a._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem 0', fontSize: '0.8rem' }}>
           <span>🏦 {a.institutionName || 'Bank'}</span>
-          <span style={{ color: 'var(--text-muted)' }}>{new Date(a.createdAt).toLocaleDateString()}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <span style={{ color: 'var(--text-muted)' }}>{new Date(a.createdAt).toLocaleDateString()}</span>
+            <button className="del-btn always" onClick={() => unlink(a)} title="Unlink">✕</button>
+          </div>
         </div>
       ))}
     </div>
