@@ -6,7 +6,6 @@ import { getCategoryBudgetStatuses, getOverallBudgetForMonth } from '../services
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 import MonthPicker from '../components/MonthPicker'
 import PlaidLinkButton, { LinkedAccounts } from '../components/PlaidLinkButton'
-import SyncButton from '../components/SyncButton'
 import EmptyState from '../components/EmptyState'
 
 export default function Dashboard() {
@@ -42,9 +41,11 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
         <MonthPicker month={month} setMonth={setMonth} transactions={monthTx} />
-        <PlaidLinkButton />
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <PlaidLinkButton />
+        </div>
       </div>
 
       <LinkedAccounts />
