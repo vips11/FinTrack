@@ -2,11 +2,13 @@ import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 import { useAppContext } from '../context/AppContext'
 import { useAuth } from '../context/AuthContext'
+import { useAlert } from './AlertDialog'
 
 export default function Sidebar() {
   const { state, dispatch } = useAppContext()
   const { user, logout, login } = useAuth()
   const theme = state.settings.theme
+  const { showAlert } = useAlert()
   const [open, setOpen] = useState(false)
 
   return (
@@ -48,7 +50,7 @@ export default function Sidebar() {
           {theme === 'dark' ? '☀️ Light mode' : '🌙 Dark mode'}
         </button>
         {user ? (
-          <button className="theme-toggle" onClick={() => { if (confirm('Are you sure you want to sign out?')) logout() }} style={{ marginTop: '0.5rem' }}>🚪 Sign out</button>
+          <button className="theme-toggle" onClick={() => showAlert({ title: 'Sign out', message: 'Are you sure you want to sign out?', showCancel: true, confirmText: 'Sign out', onConfirm: logout })} style={{ marginTop: '0.5rem' }}>🚪 Sign out</button>
         ) : (
           <button className="theme-toggle" onClick={login} style={{ marginTop: '0.5rem' }}>🔑 Sign in</button>
         )}

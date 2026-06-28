@@ -1,6 +1,7 @@
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
+import { AlertProvider } from './components/AlertDialog'
 import Sidebar from './components/Sidebar'
 import Dashboard from './pages/Dashboard'
 import Income from './pages/Income'
@@ -31,11 +32,13 @@ function Layout() {
 export default function App() {
   return (
     <AuthProvider>
-      <AppProvider>
-        <HashRouter>
-          <Layout />
-        </HashRouter>
-      </AppProvider>
+      <AlertProvider>
+        <AppProvider>
+          <HashRouter>
+            <Layout />
+          </HashRouter>
+        </AppProvider>
+      </AlertProvider>
     </AuthProvider>
   )
 }

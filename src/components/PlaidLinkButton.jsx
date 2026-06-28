@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { api } from '../services/api'
 import { useAppContext } from '../context/AppContext'
 import { useAuth } from '../context/AuthContext'
+import { useAlert } from './AlertDialog'
 
 export function LinkedAccounts() {
   const { user } = useAuth()
@@ -31,6 +32,7 @@ export function LinkedAccounts() {
 
 export default function PlaidLinkButton() {
   const { user } = useAuth()
+  const { showAlert } = useAlert()
   const [syncing, setSyncing] = useState(false)
   const [connecting, setConnecting] = useState(false)
   const { dispatch } = useAppContext()
@@ -58,7 +60,7 @@ export default function PlaidLinkButton() {
           console.log('Plaid onSuccess, exchanging token...')
           const result = await api.raw('/plaid/exchange-token', { method: 'POST', body: JSON.stringify({ public_token, metadata }) })
           console.log('Exchange result:', result)
-          alert('Bank connected! Click Sync to import transactions.')
+          showAlert({ title: '✅ Bank Connected', message: 'Your bank has been linked. Click Sync to import transactions.' })
           setConnecting(false)
         },
         onExit: (err) => { console.log('Plaid exit:', err); setConnecting(false) },
@@ -76,10 +78,10 @@ export default function PlaidLinkButton() {
       const result = await api.raw('/plaid/sync', { method: 'POST' })
       const transactions = await api.getTransactions()
       if (Array.isArray(transactions)) dispatch({ type: 'SET_DATA', payload: { transactions } })
-      alert(result?.success ? 'Transactions synced!' : 'Sync failed')
+      showAlert({ title: result?.success ? '✅ Synced' : '❌ Failed', message: result?.success ? 'Transactions have been synced.' : 'Sync failed. Try again.' })
     } catch (err) {
       console.error('Sync error:', err)
-      alert('Sync failed')
+      showAlert({ title: '❌ Error', message: 'Sync failed. Please try again.' })
     }
     setSyncing(false)
   }
