@@ -30,7 +30,7 @@ export function LinkedAccounts() {
     })
   }
 
-  if (accounts.length === 0) return null
+  if (!user || accounts.length === 0) return null
 
   return (
     <div className="card" style={{ marginBottom: '1rem' }}>
